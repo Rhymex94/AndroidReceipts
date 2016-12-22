@@ -1,0 +1,27 @@
+<!--<?xml version="1.0" encoding="utf-8"?>!-->
+<resources>
+    <string name="app_name">AndroidReceipts</string>
+
+    <!-- StartActivity strings !-->
+    <string name="welcome_message">Welcome to AndroidReceipt!</string>
+    <string name="continue_instruction">Press Continue to proceed.</string>
+    <string name="continue_button">Continue</string>
+
+    <!-- Toolbar strings !-->
+    <string name="settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_receipts">Receipts</string>
+
+
+    <!-- Settings strings !-->
+    <string name="language">Language</string>
+    <string name="langDefVal">en</string>
+    <string-array name="langs">
+        <item name="en">English</item>
+        <item name="fi">Finnish</item>
+    </string-array>
+    <string-array name="langVals">
+        <item name="en">en</item>
+        <item name="fi">fi</item>
+    </string-array>
+</resources>

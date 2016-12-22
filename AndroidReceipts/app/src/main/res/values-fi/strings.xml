@@ -1,0 +1,27 @@
+<!--<?xml version="1.0" encoding="utf-8"?>!-->
+<resources>
+    <string name="app_name">AndroidReceipts</string>
+
+    <!-- StartActivity strings !-->
+    <string name="welcome_message">Tervetuloa AndroidReceipt:iin!</string>
+    <string name="continue_instruction">Paina Jatka jatkaaksesi.</string>
+    <string name="continue_button">Jatka</string>
+
+    <!-- Toolbar strings !-->
+    <string name="settings">asetukset</string>
+    <string name="title_activity_settings">Asetukset</string>
+    <string name="title_activity_receipts">Kuitit</string>
+
+
+    <!-- Settings strings !-->
+    <string name="language">Kieli</string>
+    <string name="langDefVal">en</string>
+    <string-array name="langs">
+        <item name="en">Englanti</item>
+        <item name="fi">Suomi</item>
+    </string-array>
+    <string-array name="langVals">
+        <item name="en">en</item>
+        <item name="fi">fi</item>
+    </string-array>
+</resources>
