@@ -83,7 +83,7 @@ public class StartActivity extends AppCompatActivity {
         cont.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                f.toReceipts();
+                f.toTables();
             }
         });
     }

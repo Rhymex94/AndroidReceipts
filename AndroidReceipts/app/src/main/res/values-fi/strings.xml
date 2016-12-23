@@ -7,10 +7,19 @@
     <string name="continue_instruction">Paina Jatka jatkaaksesi.</string>
     <string name="continue_button">Jatka</string>
 
+    <!-- TablesActivity strings !-->
+    <string name="create_table_button">Uusi Taulu</string>
+
+    <!-- CreateTableDialog strings !-->
+    <string name="create_table_instructions">Anna taululle nimi:</string>
+    <string name="create_table_confirm_button">Hyväksy</string>
+    <string name="create_table_cancel_button">Peruuta</string>
+    <string name="empty_name_notification">Ole hyvä ja kirjoita nimi.</string>
+
     <!-- Toolbar strings !-->
     <string name="settings">asetukset</string>
     <string name="title_activity_settings">Asetukset</string>
-    <string name="title_activity_receipts">Kuitit</string>
+    <string name="title_activity_tables">Taulut</string>
 
 
     <!-- Settings strings !-->
@@ -24,4 +33,9 @@
         <item name="en">en</item>
         <item name="fi">fi</item>
     </string-array>
+    <string name="end_date_button">Muuta loppu pvm.</string>
+    <string name="new_receipt">Uusi Kuitti</string>
+    <string name="new_table">Uusi Taulu</string>
+    <string name="start_date_button">Muuta alku pvm.</string>
+    <string name="title_activity_receipts">Kuitit</string>
 </resources>

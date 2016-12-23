@@ -52,9 +52,15 @@ public class GFunctions {
         context.startActivity(settings);
     }
 
-    public void toReceipts(){
+    public void toTables(){
         System.out.println("toReceipts called!");
-        Intent receipts = new Intent(context, ReceiptActivity.class);
+        Intent tables = new Intent(context, TablesActivity.class);
+        context.startActivity(tables);
+    }
+
+    public void toReceipts(String tablename){
+        Intent receipts = new Intent(context, ReceiptsActivity.class);
+        receipts.putExtra("tablename", tablename);
         context.startActivity(receipts);
     }
 

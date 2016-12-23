@@ -7,39 +7,31 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class ReceiptActivity extends AppCompatActivity {
+public class ReceiptsActivity extends AppCompatActivity {
     GFunctions f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_receipts);
+
         f = new GFunctions(this);
-        f.keepLang();
 
-        setContentView(R.layout.activity_receipt);
+
         Toolbar tb = (Toolbar) findViewById(R.id.tb);
         tb.setTitle(R.string.title_activity_receipts);
         setSupportActionBar(tb);
-    }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        setContentView(R.layout.activity_receipt);
-        Toolbar tb = (Toolbar) findViewById(R.id.tb);
-        tb.setTitle(R.string.title_activity_receipts);
-        setSupportActionBar(tb);
     }
 
     //  This creates the toolbar 'buttons' from the definition in menu-folder.
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar, menu);
+        inflater.inflate(R.menu.toolbar_receipts, menu);
         return true;
     }
 
-    //  This assigns event-listeners of sorts to the 'buttons' of the toolbar.
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){

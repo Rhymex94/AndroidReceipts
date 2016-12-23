@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp"
+    android:background="#0000FF"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/create_table_instructions"
+        android:textColor="#FFFFFF"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:maxLength="20"
+        android:background="#FFFFFF"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:id="@+id/table_name_field"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/create_table_confirm"
+            android:text="@string/create_table_confirm_button"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/create_table_cancel"
+            android:text="@string/create_table_cancel_button"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>
