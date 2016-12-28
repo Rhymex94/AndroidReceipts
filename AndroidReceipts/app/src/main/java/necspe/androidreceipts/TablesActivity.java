@@ -79,6 +79,7 @@ public class TablesActivity extends AppCompatActivity {
             table.setGravity(Gravity.CENTER);
             table.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
             table.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
+            table.setBackgroundResource(R.drawable.border);
             final String name = tables.get(i);
 
             table.setOnClickListener(new View.OnClickListener() {

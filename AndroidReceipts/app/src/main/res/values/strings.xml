@@ -9,7 +9,7 @@
     <!-- TablesActivity strings !-->
     <string name="create_table_button">New Table</string>
 
-    <!-- CreateTableDialog string !-->
+    <!-- CreateTableDialog strings !-->
     <string name="create_table_instructions">Enter a name for the table:</string>
     <string name="create_table_confirm_button">Confirm</string>
     <string name="create_table_cancel_button">Cancel</string>
@@ -18,6 +18,20 @@
     <!-- ReceiptsActivity strings !-->
     <string name="start_date_button">Change start date</string>
     <string name="end_date_button">Change end date</string>
+    <string name="placeholder_date">DD--MM--YYYY</string>
+    <string name="search_instruction">Search</string>
+    <string name="search_button">GO!</string>
+
+    <!-- CreateReceiptDialog strings !-->
+    <string name="create_receipt_title">Create new receipt</string>
+    <string name="create_receipt_sum_instruction">Sum :</string>
+    <string name="create_receipt_desc_instruction">Description :</string>
+    <string name="create_receipt_date_instruction">Date :</string>
+    <string name="create_receipt_change_date_button">Change date</string>
+    <string name="create_receipt_create_button">Create</string>
+    <string name="create_receipt_cancel_button">Cancel</string>
+    <string name="create_receipt_sum_empty">Please enter the sum</string>
+    <string name="create_receipt_desc_empty">Please give a short description</string>
 
 
     <!-- Toolbar strings !-->

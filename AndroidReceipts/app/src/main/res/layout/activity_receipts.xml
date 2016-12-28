@@ -27,9 +27,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="DD-MM-YYYY"
+                android:text="@string/placeholder_date"
                 android:layout_weight="0.3"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:id="@+id/start_date_text"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -37,7 +38,8 @@
                 android:text="@string/start_date_button"
                 android:id="@+id/start_date_button"
                 android:layout_weight="1"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@drawable/border"/>
 
         </LinearLayout>
 
@@ -50,9 +52,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="DD-MM-YYYY"
+                android:text="@string/placeholder_date"
                 android:layout_weight="0.3"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:id="@+id/end_date_text"/>
 
             <Button
                 android:layout_width="match_parent"
@@ -60,7 +63,8 @@
                 android:text="@string/end_date_button"
                 android:id="@+id/end_date_button"
                 android:layout_weight="1"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@drawable/border"/>
 
         </LinearLayout>
 
@@ -80,11 +84,13 @@
 
 
             <Button
+                android:id="@+id/search_button"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:text="GO!"
                 android:layout_weight="1"
-                android:textAlignment="center"/>
+                android:textAlignment="center"
+                android:background="@drawable/border"/>
 
         </LinearLayout>
 
@@ -99,7 +105,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/receipts_layout">
         </LinearLayout>
 
     </ScrollView>
@@ -125,7 +132,8 @@
             android:text="####.##€"
             android:layout_weight="1"
             android:textAlignment="viewEnd"
-            android:textSize="15sp"/>
+            android:textSize="15sp"
+            android:id="@+id/total_sum_field"/>
 
     </LinearLayout>
 

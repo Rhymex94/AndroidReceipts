@@ -20,10 +20,12 @@ public class Database extends SQLiteOpenHelper {
     public static final String TABLES_TABLE_NAME = "Tables";
     public static final String DATA_TABLE_NAME = "Data";
     Context c;
+    GFunctions f;
 
     public Database(Context c){
         super(c, DATABASE_NAME, null, 1);
         this.c = c;
+        f = new GFunctions(c);
     }
 
     @Override
@@ -34,7 +36,7 @@ public class Database extends SQLiteOpenHelper {
         );
         db.execSQL(
                 "create table " + DATA_TABLE_NAME
-                + "(checks text primary key, tablename text, sum integer, date text, desc text);"
+                + "(checks text primary key, tablename text, sum text, date text, desc text);"
         );
     }
 
@@ -60,7 +62,7 @@ public class Database extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean addReceipt(String tableName, int sum, String date, String desc){
+    public boolean addReceipt(String tableName, String sum, String date, String desc){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues vals = new ContentValues();
         vals.put("tablename", tableName);
@@ -84,24 +86,41 @@ public class Database extends SQLiteOpenHelper {
         return true;
     }
 
-    public ArrayList<ArrayList<String>> getAllReceipts(String tableName){
+    public ArrayList<ArrayList<String>> getReceipts(String tableName, String start, String end){
         ArrayList<ArrayList<String>> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery(
-                "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName + "'", null
-        );
-        res.moveToFirst();
-        while(!res.isAfterLast()){
-            ArrayList<String> current = new ArrayList<>();
-            current.add(res.getString(res.getColumnIndex("sum")));
-            current.add(res.getString(res.getColumnIndex("date")));
-            current.add(res.getString(res.getColumnIndex("desc")));
-            current.add(res.getString(res.getColumnIndex("checks")));
-            list.add(current);
-            res.moveToNext();
+        String placeholder = "DD--MM--YYYY";
+
+        if (start.equals(placeholder) && end.equals(placeholder)){
+            Cursor res = db.rawQuery(
+                    "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName + "'", null
+            );
+            f.makeList(res, list);
+
+            return list;
+        } else if (start.equals(placeholder)){
+            Cursor res = db.rawQuery(
+                    "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName
+                    + "' and date <= '" + end + "'", null
+            );
+            f.makeList(res, list);
+            return list;
+        } else if (end.equals(placeholder)){
+            Cursor res = db.rawQuery(
+                    "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName
+                    + "' and date >= '" + start + "'", null
+            );
+            f.makeList(res, list);
+            return list;
+        } else {
+            Cursor res = db.rawQuery(
+                    "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName
+                    + "' and date >= '" + start + "' and date <= '" + end + "'", null
+            );
+            f.makeList(res, list);
+            return list;
         }
-        res.close();
-        return list;
+
     }
 
     public ArrayList<String> getAllTables(){

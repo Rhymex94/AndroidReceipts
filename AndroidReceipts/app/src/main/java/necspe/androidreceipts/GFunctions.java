@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.Cursor;
 import android.media.audiofx.BassBoost;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.Toolbar;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -44,6 +46,21 @@ public class GFunctions {
         Configuration config = new Configuration();
         config.setLocale(loc);
         context.getApplicationContext().getResources().updateConfiguration(config, null);
+    }
+
+
+    public void makeList(Cursor res, ArrayList<ArrayList<String>> target){
+        res.moveToFirst();
+        while(!res.isAfterLast()){
+            ArrayList<String> current = new ArrayList<>();
+            current.add(res.getString(res.getColumnIndex("sum")));
+            current.add(res.getString(res.getColumnIndex("date")));
+            current.add(res.getString(res.getColumnIndex("desc")));
+            current.add(res.getString(res.getColumnIndex("checks")));
+            target.add(current);
+            res.moveToNext();
+        }
+        res.close();
     }
 
     //  Used to intent from a given view to the SettingsActivity.
