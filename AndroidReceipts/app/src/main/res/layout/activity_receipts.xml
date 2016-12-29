@@ -16,6 +16,7 @@
         android:layout_height="70dp"
         android:orientation="horizontal"
         android:id="@+id/linearLayout2"
+        android:layout_marginBottom="10dp"
         android:layout_below="@+id/tb">
 
         <LinearLayout
@@ -77,7 +78,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="Search"
+                android:text="@string/search_instruction"
                 android:layout_weight="0.3"
                 android:textAlignment="center"/>
 
@@ -87,7 +88,7 @@
                 android:id="@+id/search_button"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:text="GO!"
+                android:text="@string/search_button"
                 android:layout_weight="1"
                 android:textAlignment="center"
                 android:background="@drawable/border"/>
@@ -122,14 +123,14 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Total:"
+            android:text="@string/receipts_total"
             android:layout_weight="1"
             android:textSize="15sp"/>
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="####.##€"
+            android:text="@string/receipts_total_sum_placeholder"
             android:layout_weight="1"
             android:textAlignment="viewEnd"
             android:textSize="15sp"

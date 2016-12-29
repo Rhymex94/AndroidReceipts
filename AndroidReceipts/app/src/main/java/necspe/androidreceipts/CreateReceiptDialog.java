@@ -30,6 +30,7 @@ public class CreateReceiptDialog extends Dialog{
     Button createButton;
     Button cancelButton;
     SimpleDateFormat formatter;
+    GFunctions f;
 
 
     public CreateReceiptDialog(Activity c, String table){
@@ -44,6 +45,7 @@ public class CreateReceiptDialog extends Dialog{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_create_receipt);
         db = new Database(getContext());
+        f = new GFunctions(getContext());
 
         formatter = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
@@ -62,7 +64,7 @@ public class CreateReceiptDialog extends Dialog{
             public void onClick(View v) {
                 String sum = sumText.getText().toString().trim();
                 String desc = descText.getText().toString().trim();
-                String date = dateText.getText().toString().trim();
+                String date = f.dateConvert(dateText.getText().toString().trim());
                 if (!sum.equals("") && !desc.equals("")) {
                     db.addReceipt(table, sum, date, desc);
                     dismiss();

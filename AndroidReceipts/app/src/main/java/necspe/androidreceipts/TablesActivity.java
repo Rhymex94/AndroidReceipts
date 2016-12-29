@@ -89,6 +89,15 @@ public class TablesActivity extends AppCompatActivity {
                 }
             });
 
+            table.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    RemoveTableDialog dialog = new RemoveTableDialog(TablesActivity.this, name);
+                    dialog.show();
+                    return true;
+                }
+            });
+
             tl.addView(table);
         }
 

@@ -81,6 +81,9 @@ public class GFunctions {
         context.startActivity(receipts);
     }
 
-
+    public String dateConvert(String date){
+        String out = date.split("-")[2] + "-" + date.split("-")[1] + "-" + date.split("-")[0];
+        return out;
+    }
 
 }

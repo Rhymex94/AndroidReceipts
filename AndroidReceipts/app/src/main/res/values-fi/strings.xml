@@ -38,4 +38,21 @@
     <string name="new_table">Uusi Taulu</string>
     <string name="start_date_button">Muuta alku pvm.</string>
     <string name="title_activity_receipts">Kuitit</string>
+    <string name="create_receipt_cancel_button">Peruuta</string>
+    <string name="create_receipt_change_date_button">Vaihda päivämäärää</string>
+    <string name="create_receipt_create_button">Luo</string>
+    <string name="create_receipt_date_instruction">Pvm :</string>
+    <string name="create_receipt_desc_empty">Syötä lyhyt kuvaus</string>
+    <string name="create_receipt_desc_instruction">Kuvaus :</string>
+    <string name="create_receipt_sum_empty">Syötä summa</string>
+    <string name="create_receipt_sum_instruction">Summa :</string>
+    <string name="create_receipt_title">Luo uusi kuitti</string>
+    <string name="placeholder_date">DD--MM--YYYY</string>
+    <string name="remove_receipt_no">Ei</string>
+    <string name="remove_receipt_title">Haluatko varmasti poistaa tämän kuitin?</string>
+    <string name="remove_receipt_yes">Kyllä</string>
+    <string name="remove_table_title">Haluatko varmasti poistaa tämän taulun?</string>
+    <string name="search_button">HAE!</string>
+    <string name="search_instruction">Etsi</string>
+    <string name="receipts_total">Yhteensä:</string>
 </resources>

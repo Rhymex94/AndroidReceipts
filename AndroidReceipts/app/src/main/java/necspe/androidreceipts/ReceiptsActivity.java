@@ -1,6 +1,7 @@
 package necspe.androidreceipts;
 
 import android.app.DatePickerDialog;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -38,6 +39,8 @@ public class ReceiptsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_receipts);
+
+        receipts = new ArrayList<>();
 
         sd = (Button) findViewById(R.id.start_date_button);
         setStartButtonListener();
@@ -83,6 +86,9 @@ public class ReceiptsActivity extends AppCompatActivity {
         setSearchButtonListener();
         receiptsLayout = (LinearLayout) findViewById(R.id.receipts_layout);
         sumfield = (TextView) findViewById(R.id.total_sum_field);
+
+        receipts = db.getReceipts(tablename, st.getText().toString(), et.getText().toString());
+        renderReceipts(receipts);
     }
 
     //  This creates the toolbar 'buttons' from the definition in menu-folder.
@@ -161,18 +167,60 @@ public class ReceiptsActivity extends AppCompatActivity {
         receiptsLayout.removeAllViews();
         double sum = 0.0;
         for (int i = 0; i < receipts.size(); i++){
-            Button receipt = new Button(this);
-            String text = receipts.get(i).get(1) + "    " + receipts.get(i).get(2) + "    " +
-                    String.format("%.2f", Double.parseDouble(receipts.get(i).get(0)));
-            receipt.setText(text);
+            LinearLayout receipt = new LinearLayout(this);
+            receipt.setOrientation(LinearLayout.HORIZONTAL);
+            receipt.setPadding(0, 12, 0, 12);
+            TextView sumText = new TextView(this);
+            TextView dateText = new TextView(this);
+            TextView descText = new TextView(this);
+
+            sumText.setTextSize(20);
+            sumText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            dateText.setTextSize(20);
+            dateText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            descText.setTextSize(20);
+            descText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+            sumText.setText(String.format("%.2f", Double.parseDouble(receipts.get(i).get(0))));
+            dateText.setText(f.dateConvert(receipts.get(i).get(1)));
+            descText.setText(receipts.get(i).get(2));
+
+            final String checks = receipts.get(i).get(3);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
+            );
+            params.setMargins(0,8,0,8);
+
+            sumText.setLayoutParams(params);
+            dateText.setLayoutParams(params);
+            descText.setLayoutParams(params);
+
+            receipt.addView(dateText);
+            receipt.addView(descText);
+            receipt.addView(sumText);
+
             receipt.setGravity(Gravity.CENTER);
-            receipt.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-            receipt.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             receipt.setBackgroundResource(R.drawable.border);
             sum += Double.parseDouble(receipts.get(i).get(0));
+
+
+            receipt.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    RemoveReceiptDialog dialog = new RemoveReceiptDialog(ReceiptsActivity.this,
+                            checks);
+                    dialog.show();
+                    return true;
+                }
+            });
+
+
+
             receiptsLayout.addView(receipt);
         }
         sumfield.setText(String.format("%.2f", sum));
 
     }
+
 }

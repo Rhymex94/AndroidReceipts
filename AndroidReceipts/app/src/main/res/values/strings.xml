@@ -21,6 +21,8 @@
     <string name="placeholder_date">DD--MM--YYYY</string>
     <string name="search_instruction">Search</string>
     <string name="search_button">GO!</string>
+    <string name="receipts_total">Total:</string>
+    <string name="receipts_total_sum_placeholder">0.00</string>
 
     <!-- CreateReceiptDialog strings !-->
     <string name="create_receipt_title">Create new receipt</string>
@@ -32,6 +34,12 @@
     <string name="create_receipt_cancel_button">Cancel</string>
     <string name="create_receipt_sum_empty">Please enter the sum</string>
     <string name="create_receipt_desc_empty">Please give a short description</string>
+
+    <!-- RemoveDialog strings !-->
+    <string name="remove_receipt_title">Are you sure you want to delete this receipt?</string>
+    <string name="remove_table_title">Are you sure you want to delete this table?</string>
+    <string name="remove_receipt_yes">Yes</string>
+    <string name="remove_receipt_no">No</string>
 
 
     <!-- Toolbar strings !-->

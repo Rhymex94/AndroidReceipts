@@ -93,7 +93,7 @@ public class Database extends SQLiteOpenHelper {
 
         if (start.equals(placeholder) && end.equals(placeholder)){
             Cursor res = db.rawQuery(
-                    "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName + "'", null
+                    "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName + "' order by date desc", null
             );
             f.makeList(res, list);
 
@@ -101,21 +101,22 @@ public class Database extends SQLiteOpenHelper {
         } else if (start.equals(placeholder)){
             Cursor res = db.rawQuery(
                     "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName
-                    + "' and date <= '" + end + "'", null
+                    + "' and date <= '" + f.dateConvert(end) + "' order by date desc", null
             );
             f.makeList(res, list);
             return list;
         } else if (end.equals(placeholder)){
             Cursor res = db.rawQuery(
                     "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName
-                    + "' and date >= '" + start + "'", null
+                    + "' and date >= '" + f.dateConvert(start) + "' order by date desc", null
             );
             f.makeList(res, list);
             return list;
         } else {
             Cursor res = db.rawQuery(
                     "select * from " + DATA_TABLE_NAME + " where tablename = '" + tableName
-                    + "' and date >= '" + start + "' and date <= '" + end + "'", null
+                    + "' and date >= '" + f.dateConvert(start) + "' and date <= '"
+                    + f.dateConvert(end) + "' order by date desc", null
             );
             f.makeList(res, list);
             return list;
