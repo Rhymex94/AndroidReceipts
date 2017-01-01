@@ -49,6 +49,12 @@ public class GFunctions {
     }
 
 
+    /**
+     * makeList creates an ArrayList from the data acquired by a Cursor object. Used namely in
+     * Database -class' getReceipts method.
+     * @param res the cursor -object whose data is to be listed.
+     * @param target the target ArrayList into which the data should be put into.
+     */
     public void makeList(Cursor res, ArrayList<ArrayList<String>> target){
         res.moveToFirst();
         while(!res.isAfterLast()){
@@ -69,18 +75,29 @@ public class GFunctions {
         context.startActivity(settings);
     }
 
+    // Used to intent from a given view to the TablesActivity.
     public void toTables(){
         System.out.println("toReceipts called!");
         Intent tables = new Intent(context, TablesActivity.class);
         context.startActivity(tables);
     }
 
+    /**
+     * Used to intent from a given view to the ReceiptsActivity.
+     * @param tablename the name of the table whose receipts are to be shown in ReceiptsActivity.
+     */
     public void toReceipts(String tablename){
         Intent receipts = new Intent(context, ReceiptsActivity.class);
         receipts.putExtra("tablename", tablename);
         context.startActivity(receipts);
     }
 
+    /**
+     * dateConvert converts the textual presentation of the date into another. Namely, it changes
+     * the presentation of YYYY-MM-DD to DD-MM-YYYY.
+     * @param date
+     * @return
+     */
     public String dateConvert(String date){
         String out = date.split("-")[2] + "-" + date.split("-")[1] + "-" + date.split("-")[0];
         return out;

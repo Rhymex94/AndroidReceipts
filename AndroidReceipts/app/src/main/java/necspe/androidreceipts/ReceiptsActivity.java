@@ -21,6 +21,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+/**
+ * ReceiptsActivity takes care of displaying receipts of a given table. Every table entry in the
+ * TablesActivity opens its own ReceiptsActivity.
+ */
 public class ReceiptsActivity extends AppCompatActivity {
     GFunctions f;
     Database db;
@@ -35,6 +39,12 @@ public class ReceiptsActivity extends AppCompatActivity {
     ArrayList<ArrayList<String>> receipts;
     TextView sumfield;
 
+    /**
+     * onCreate function is called automatically every time a new instance of ReceiptsActivity is
+     * created. It takes care of fetching the layout file, assigning the variables used across
+     * the activity and assigning the onClickListeners to the layout's buttons.
+     * @param savedInstanceState a bundle containing information about the instance's state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +65,12 @@ public class ReceiptsActivity extends AppCompatActivity {
 
         tablename = getIntent().getStringExtra("tablename");
 
+        // formatter is used to represent DatePicker's dates as a text.
         formatter = new SimpleDateFormat("dd-MM-yyyy");
 
+        // GFunctions provides access to a collection of often used methods.
         f = new GFunctions(this);
+        // This allows for instant effect of changing language. Otherwise a reload is required.
         f.keepLang();
         db = new Database(this);
 
@@ -68,6 +81,11 @@ public class ReceiptsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * onResume does basically the same things as the onCreate above, except it is called whenever
+     * the application returns to this specific activity. This often is required for displaying
+     * possible changes immediately, without having to reload separately.
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -99,13 +117,16 @@ public class ReceiptsActivity extends AppCompatActivity {
         return true;
     }
 
+    // This assigns the reactions for the buttons in the toolbar.
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
+            // if the settings button is clicked, redirect to the settings.
             case R.id.settings:
                 f.toSettings();
                 return true;
 
+            // if the newReceipt button is clicked, show the CreateReceiptDialog.
             case R.id.newReceipt:
                 CreateReceiptDialog d = new CreateReceiptDialog(this, getIntent().getStringExtra("tablename"));
                 d.show();
@@ -115,6 +136,12 @@ public class ReceiptsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * setStartButtonListener is a function that sets the onClickListener to the Start -button.
+     * Clicking it opens a DatePicker for picking a start date. Having this as a function saves us
+     * from the chore of having to write the exact same lines twice, in both onCreate and onResume
+     * functions.
+     */
     public void setStartButtonListener(){
         sd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +152,7 @@ public class ReceiptsActivity extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                         Calendar date = Calendar.getInstance();
                         date.set(year, monthOfYear, dayOfMonth);
+                        // Set the date picked by DatePicker as a text in its TextView.
                         st.setText(formatter.format(date.getTime()));
 
                     }
@@ -134,6 +162,9 @@ public class ReceiptsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * same story as with the setStartButtonListener, except this time for the end date.
+     */
     public void setEndButtonListener(){
         ed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,27 +184,41 @@ public class ReceiptsActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * setSearchButtonListener sets an onClickListener for the search -button, which queries the
+     * database for receipts with given date constraints and the table name.
+     */
     public void setSearchButtonListener(){
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 receipts = db.getReceipts(tablename, st.getText().toString(), et.getText().toString());
+                // Check renderReceipts for details on presenting the receipts.
                 renderReceipts(receipts);
             }
         });
     }
 
+    /**
+     * renderReceipts creates visual presentations for the receipts to the ReceiptsActivity.
+     * @param receipts the list of the data in the receipts to be rendered.
+     */
     public void renderReceipts(ArrayList<ArrayList<String>> receipts){
         receiptsLayout.removeAllViews();
+        // Sum is displayed in the bottom of the screen, and this contains the value.
+        // Upon rendering each receipt, their sums are added to this variable.
         double sum = 0.0;
         for (int i = 0; i < receipts.size(); i++){
+            // Create a new linear, horizontal layout.
             LinearLayout receipt = new LinearLayout(this);
             receipt.setOrientation(LinearLayout.HORIZONTAL);
             receipt.setPadding(0, 12, 0, 12);
+            // Create three TextViews, one for sum, one for date, and one for description.
             TextView sumText = new TextView(this);
             TextView dateText = new TextView(this);
             TextView descText = new TextView(this);
 
+            // Add the visual options.
             sumText.setTextSize(20);
             sumText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             dateText.setTextSize(20);
@@ -181,12 +226,15 @@ public class ReceiptsActivity extends AppCompatActivity {
             descText.setTextSize(20);
             descText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
+            // Set data as text into the according TextViews.
             sumText.setText(String.format("%.2f", Double.parseDouble(receipts.get(i).get(0))));
             dateText.setText(f.dateConvert(receipts.get(i).get(1)));
             descText.setText(receipts.get(i).get(2));
 
+            // Keep the checksum in memory.
             final String checks = receipts.get(i).get(3);
 
+            // Add the layout params.
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f
             );
@@ -196,15 +244,18 @@ public class ReceiptsActivity extends AppCompatActivity {
             dateText.setLayoutParams(params);
             descText.setLayoutParams(params);
 
+            // Add the created TextViews to the LinearLayout.
             receipt.addView(dateText);
             receipt.addView(descText);
             receipt.addView(sumText);
 
             receipt.setGravity(Gravity.CENTER);
             receipt.setBackgroundResource(R.drawable.border);
+            // Update the sum of all receipts.
             sum += Double.parseDouble(receipts.get(i).get(0));
 
 
+            // Set an onLongClickListener to be able to delete this specific receipt when needed.
             receipt.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -217,8 +268,10 @@ public class ReceiptsActivity extends AppCompatActivity {
 
 
 
+            // Add the receipts data to the activity's view.
             receiptsLayout.addView(receipt);
         }
+        // Display the sum of all receipts.
         sumfield.setText(String.format("%.2f", sum));
 
     }
