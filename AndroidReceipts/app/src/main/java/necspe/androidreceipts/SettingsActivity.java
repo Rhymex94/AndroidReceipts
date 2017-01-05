@@ -41,17 +41,29 @@ public class SettingsActivity extends AppCompatActivity {
         public static final String LANG = "language";
 
 
+        /**
+         * onCreate is a function that is automatically called whenever an instance of
+         * SettingsFragment is created. It takes care of populating the view with the available
+         * options.
+         * @param savedInstanceState
+         */
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             //  When created, we want to present the current settings.
             addPreferencesFromResource(R.xml.preferences);
             ListPreference listPref = (ListPreference) findPreference(LANG);
+            // Which language is currently being used? Display that language.
             if (listPref.getValue() != null){
                 listPref.setSummary(listPref.getEntry());
             }
         }
 
+        /**
+         * onResume works similarly with the onCreate, except it is called whenever the user returns
+         * to an instance of SettingsFragment that has been created earlier. It also registers an
+         * event listener, that reacts to SharedPreference -changes.
+         */
         @Override
         public void onResume() {
             super.onResume();
@@ -59,6 +71,11 @@ public class SettingsActivity extends AppCompatActivity {
                     .registerOnSharedPreferenceChangeListener(this);
         }
 
+        /**
+         * Like onCreate and onResume, is called whenever a specific action has been carried out.
+         * In this case, whenever the user leaves the SettingsFragment without finishing it.
+         * In contrary to onResume, where we register an event listener, here we unregister it.
+         */
         @Override
         public void onPause() {
             super.onPause();
@@ -81,6 +98,8 @@ public class SettingsActivity extends AppCompatActivity {
                 ListPreference listPref = (ListPreference) findPreference(LANG);
                 listPref.setSummary(listPref.getEntry());
                 SettingsFragment temp = (SettingsFragment) getActivity().getFragmentManager().findFragmentByTag("curr");
+                // In order to get the changes visible in the SettingsFragment itself, we need to
+                // replace it with a new, updated one.
                 getFragmentManager().beginTransaction().remove(temp)
                         .replace(R.id.framel, new SettingsFragment(), "curr").commit();
             }

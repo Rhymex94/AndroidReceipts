@@ -27,6 +27,12 @@ public class StartActivity extends AppCompatActivity {
     Button cont;
     GFunctions f;
 
+    /**
+     * onCreate is called whenever an instance of StartActivity is created, which should actually
+     * be only once, when opening the application. It takes care of fetching the layout file and
+     * assigning the OnClickListener to the continue-button within the view.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +53,15 @@ public class StartActivity extends AppCompatActivity {
         setOnClickToCont();
     }
 
+    /**
+     * onResume functions very similarly to the onCreate, except it gets called whenever the user
+     * returns to an already existing instance of StartActivity. This can happen, for example, when
+     * user visits the settings and comes back.
+     */
     @Override
     protected void onResume(){
         super.onResume();
+        // In order to get updated view, the layout is fetched again and event listeners re-set.
         setContentView(R.layout.activity_start);
         Toolbar tb = (Toolbar) findViewById(R.id.tb);
         setSupportActionBar(tb);
@@ -79,10 +91,16 @@ public class StartActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * setOnClickToCont is just a short-cut for assigning the action for continue-button, which is
+     * to continue to the TablesActivity. Having this set in one function, we won't have to rewrite
+     * these lines twice, once both in onCreate and onResume.
+     */
     private void setOnClickToCont(){
         cont.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                // When clicked, start the TablesActivity. See GFunctions for details.
                 f.toTables();
             }
         });
