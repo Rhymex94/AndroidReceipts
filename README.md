@@ -1,4 +1,4 @@
-#AndroidReceipts
+# AndroidReceipts
 
 AndroidReceipts is a small Android application for storing and viewing receipts. It provides an easy way to keep track of spending habits.
 
